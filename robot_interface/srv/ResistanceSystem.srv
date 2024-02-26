@@ -1,0 +1,4 @@
+float64 tension #Tension in volts(V)
+float64 current #Current in ampers(A)
+---
+float64 resistance #Resistance response returns Ohms
