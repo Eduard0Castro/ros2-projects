@@ -35,7 +35,7 @@ class ResistanceClient: public rclcpp::Node{
 
             catch(std::exception &ex){
 
-                RCLCPP_ERROR(this->get_logger(), "Exception ocurred");
+                RCLCPP_ERROR(this->get_logger(), "Exception occurred");
 
             }
         }

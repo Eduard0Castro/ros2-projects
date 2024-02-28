@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "server_led = toggle_led_python.server_led_panel:main"
+            "server_led = toggle_led_python.server_led_panel:main",
+            "battery_state = toggle_led_python.battery_state:main"
         ],
     },
 )
