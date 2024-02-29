@@ -7,7 +7,8 @@ class LedServer(Node):
     def __init__(self):
         super().__init__("led_server")
         self.msg = LedTrigger()
-        self.msg.leds = [False, False, False]
+        self.declare_parameter("led_state", [False, False, True])
+        self.msg.leds = self.get_parameter("led_state").value
         self.server_ = self.create_service(LedState, "set_led", self.led_callback)
         self.publisher_ = self.create_publisher(LedTrigger, "led_panel_state", 10)
         self.hugo = ["full", "empty"]

@@ -10,15 +10,16 @@ class RobotStation: public rclcpp::Node{
             example_interfaces::msg::String msg;
             msg.data = std::string("Tá saindo da jaula o monstro ") + robot_name;
             publisher_->publish(msg);
-
         }
 
         std::string robot_name;
 
     public:
 
-        RobotStation():Node("robot_station"), robot_name("EJSC"){
+        RobotStation():Node("robot_station"){
             publisher_ = this->create_publisher<example_interfaces::msg::String>("robot_news", 10);
+            this->declare_parameter("robot_name", "EJSC");
+            robot_name = this->get_parameter("robot_name").as_string();
             timer_ = this->create_wall_timer(std::chrono::milliseconds(500), 
                                              std::bind(&RobotStation::publisher_news, this));
             RCLCPP_INFO(this->get_logger(), "Robot Station News has been started");

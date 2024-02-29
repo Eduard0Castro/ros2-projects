@@ -62,9 +62,11 @@ class SetLedServer: public rclcpp::Node{
             server_ = this->create_service<led_interface::srv::LedState>("set_led", 
                                             std::bind(&SetLedServer::call_server, this,
                                             std::placeholders::_1, std::placeholders::_2));
+            
+            this->declare_parameter("led_state", std::vector<bool>{false, false, false});
+            msg.leds = this->get_parameter("led_state").as_bool_array();
 
             publisher_ = this->create_publisher<led_interface::msg::LedTrigger>("led_panel_trigger", 10);
-            msg.leds = {false, false, false};
             timer_ = this->create_wall_timer(std::chrono::seconds(4), std::bind(&SetLedServer::led_panel_publish, this));
             RCLCPP_INFO(this->get_logger(), "Led Panel Server has been initialized");
         }
