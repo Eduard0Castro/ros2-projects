@@ -2,6 +2,4 @@ build
 install
 log
 __pycache__
-/toggle_led_python/toggle_led_python/__pycache__
-/python_pkg/python_pkg/__pycache__
-maquina_1/maquina_1/__pycache__
+
