@@ -7,7 +7,6 @@ from functools import partial
 from random import randint
 from math import sqrt, pow, atan2, pi
 
-
 class EatTurtle(Node):
     def __init__(self):
         super().__init__("eat_turtle")

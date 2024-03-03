@@ -22,7 +22,8 @@ setup(
         'console_scripts': [
             "circle_turtle = move_turtle.circle_turtle:main",
             "eat_turtle = move_turtle.eat_turtle:main",
-            "spawner_turtle = move_turtle.turtle_spawner:main"
+            "spawner_turtle = move_turtle.turtle_spawner:main",
+            "controller = move_turtle.turtle_controller:main"
         ],
     },
 )
