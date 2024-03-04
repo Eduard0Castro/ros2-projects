@@ -11,7 +11,7 @@ from project_turtle_interface.msg import Turtle, TurtleArray
 class TurtleSpwaner (Node):
     def __init__(self):
         super().__init__("turtle_spawner")
-        self.timer = self.create_timer(4, self.call_spawn_server)
+        self.timer = self.create_timer(1, self.call_spawn_server)
         self.server = self.create_service(DeadTurtle, "dead_turtle", self.server_turtle_kill)
         self.alive_turtles__ = list()
         self.pub_alive_turtles = self.create_publisher(TurtleArray, "alive_turtles", 10)
@@ -68,14 +68,14 @@ class TurtleSpwaner (Node):
         while not client.wait_for_service(1):
             self.get_logger().warn("Waiting for service")
 
-        client.call_async(request)
-
         for i, turtle in enumerate(self.alive_turtles__):
             if turtle.name == turtle_name:
                 del self.alive_turtles__[i]
+                self.pub_alive_turtles_func()
                 break
 
-
+        client.call_async(request)
+   
 
     def server_turtle_kill(self, request, response):
         name = request.name
