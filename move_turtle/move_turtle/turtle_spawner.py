@@ -11,11 +11,14 @@ from project_turtle_interface.msg import Turtle, TurtleArray
 class TurtleSpwaner (Node):
     def __init__(self):
         super().__init__("turtle_spawner")
-        self.timer = self.create_timer(1, self.call_spawn_server)
+        self.declare_parameter("frequency", 1.0)
+        frequency = self.get_parameter("frequency").value
+        time = 1/frequency
+        self.timer = self.create_timer(time, self.call_spawn_server)
         self.server = self.create_service(DeadTurtle, "dead_turtle", self.server_turtle_kill)
         self.alive_turtles__ = list()
         self.pub_alive_turtles = self.create_publisher(TurtleArray, "alive_turtles", 10)
-        self.get_logger().info("Turtle Spawner has been initialized teste")
+        self.get_logger().info("Turtle Spawner Nefario has been initialized teste")
 
 
     def call_spawn_server(self):
