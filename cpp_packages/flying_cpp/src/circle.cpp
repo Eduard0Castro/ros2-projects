@@ -11,7 +11,6 @@ class Circle: public rclcpp::Node{
 
         rclcpp::Publisher<mavros_msgs::msg::PositionTarget>::SharedPtr vel_pub;
         std::vector<std::shared_ptr<std::thread>> thread;
-        int nano = 1000000000;
 
     public:
 
@@ -78,7 +77,7 @@ class Circle: public rclcpp::Node{
             try{
                 auto response = future.get();
                 RCLCPP_INFO(this->get_logger(), "Arming: %d", response->success);
-                rclcpp::sleep_for(std::chrono::nanoseconds(3*nano));
+                rclcpp::sleep_for(std::chrono::seconds(2));
                 thread.push_back(std::make_shared<std::thread>(std::bind(&Circle::takeoff_call_server, this)));
 
             }
